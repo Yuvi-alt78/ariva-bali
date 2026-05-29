@@ -48,6 +48,7 @@ export async function submitBookingInquiry(data: {
   travel_date: string
   guests: number
   message: string
+  
 }) {
   return supabase.from('booking_inquiries').insert(data)
 }
