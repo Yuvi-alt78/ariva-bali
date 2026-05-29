@@ -48,18 +48,9 @@ export async function submitBookingInquiry(data: {
   travel_date: string
   guests: number
   message: string
+  
 }) {
-  const { data: result, error } = await supabase
-    .from('contact_forms')
-    .insert([data])
-    .select()
-
-  console.log('RESULT:', result)
-  console.log('ERROR:', error)
-
-  if (error) throw error
-
-  return result
+  return supabase.from('booking_inquiries').insert(data)
 }
 
 export async function subscribeNewsletter(
