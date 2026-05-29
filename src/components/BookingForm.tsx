@@ -23,17 +23,26 @@ export default function BookingForm() {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!form.name || !form.email) return;
-    setStatus('loading');
-    const { error } = await submitBookingInquiry(form);
-    if (error) {
-      setStatus('error');
-      setErrorMsg('Something went wrong. Please try again.');
-    } else {
-      setStatus('success');
-    }
+  e.preventDefault();
+
+  if (!form.name || !form.email) return;
+
+  setStatus('loading');
+
+  const payload = {
+    ...form,
+    travel_date: form.travel_date || null,
   };
+
+  const { error } = await submitBookingInquiry(payload);
+
+  if (error) {
+    setStatus('error');
+    setErrorMsg(error.message || 'Something went wrong. Please try again.');
+  } else {
+    setStatus('success');
+  }
+};
 
   const inputClass = 'w-full bg-transparent border-b border-stone-700 py-3 text-white text-sm placeholder-stone-600 focus:outline-none focus:border-amber-300 transition-colors duration-300';
   const labelClass = 'block text-stone-500 text-xs tracking-[0.2em] uppercase mb-2';
