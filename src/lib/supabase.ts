@@ -50,7 +50,7 @@ export async function submitBookingInquiry(data: {
   message: string
 }) {
   const { data: result, error } = await supabase
-    .from('booking_inquiries')
+    .from('contact_forms')
     .insert([data])
     .select()
 
